@@ -7,7 +7,7 @@ export default function AuthPage() {
   return (
     <div className="flex items-center justify-center h-dvh font-sans">
       <div className="w-full max-w-xl">
-        <p className="font-mono uppercase font-semibold mb-10">
+        <p className="font-mono font-semibold mb-10">
           {process.env.NEXT_PUBLIC_APP_NAME || "??"}
         </p>
         <p className="font-semibold text-3xl">
