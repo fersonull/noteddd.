@@ -4,16 +4,18 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { ChevronDown, User } from "lucide-react";
+import { ChevronDown, LogOut, User } from "lucide-react";
+import DropdownItems from "./dropdown-items";
+import { logout } from "@/lib/actions/auth";
 
 export default async function UserAvatar() {
   const session = await auth();
+
   return (
     // <div className="flex items-center gap-3 font-sans">
     //   {/* user avatart */}
@@ -41,12 +43,13 @@ export default async function UserAvatar() {
     // </div>
 
     // name and dropdown only
+
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
           <User />
           <span>
-            <p className="font-sans">{session.user.email}</p>
+            <p className="font-sans">{session?.user?.email}</p>
           </span>
           <ChevronDown />
         </Button>
@@ -57,10 +60,7 @@ export default async function UserAvatar() {
             My Account
           </DropdownMenuLabel>
           {/* <DropdownMenuSeparator /> */}
-          <DropdownMenuItem>
-            <User strokeWidth={2.4} />
-            Profile
-          </DropdownMenuItem>
+          <DropdownItems />
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
