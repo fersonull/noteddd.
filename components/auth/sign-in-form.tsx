@@ -20,12 +20,20 @@ export default function SignInForm() {
         </p>
 
         <Separator className="mt-10 mb-6" />
-        <div className="flex flex-col items-start justify-center gap-4">
-          <Button variant="outline" onClick={() => login("github", "/")}>
+        <div className="flex flex-col items-start justify-center gap-4 w-full">
+          <Button
+            className="w-full"
+            variant="outline"
+            onClick={() => login("github", "/dashboard")}
+          >
             <FaGithub />
-            <span>Continue with Github</span>
+            <span>Continue with GitHub</span>
           </Button>
-          <Button variant="outline" onClick={() => login("google", "/")}>
+          <Button
+            className="w-full"
+            variant="outline"
+            onClick={() => login("google", "/dashboard")}
+          >
             <FcGoogle />
             <span>Continue with Google</span>
           </Button>
