@@ -4,4 +4,19 @@ import Google from "next-auth/providers/google";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   providers: [GitHub, Google],
+  callbacks: {
+    async session({ session, token }) {
+      if (session.user && token.sub) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+
+    async jwt({ user, token }) {
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
+    },
+  },
 });
