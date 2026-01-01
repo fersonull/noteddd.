@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "../ui/button";
 import UserAvatar from "./user-avatar";
 import { FaGithub } from "react-icons/fa";
@@ -8,9 +9,11 @@ export default async function Navbar() {
       <div className="flex items-center justify-between w-full max-w-6xl">
         <UserAvatar />
 
-        <Button variant="link" size="sm">
-          <FaGithub />
-          <p>GitHub</p>
+        <Button variant="link" size="sm" asChild>
+          <Link href="https://github.com/fersonull/noteddd." target="_blank">
+            <FaGithub />
+            <p>Contribute</p>
+          </Link>
         </Button>
       </div>
     </div>
