@@ -42,7 +42,7 @@ const items = [
 
 export default function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar className="font-sans">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
