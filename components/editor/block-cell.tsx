@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import type { Block } from "@/lib/types";
 import { useEffect, useRef } from "react";
+import { CodeBlock } from "./code-editor";
 
 interface BlockCellProps {
   block: Block;
@@ -17,12 +18,9 @@ export function BlockCell({ block, onUpdate, onDelete }: BlockCellProps) {
 
   // Auto-resize textarea height
   useEffect(() => {
-    const textarea = textareaRef.current;
-    if (textarea) {
-      // 1. Reset height to auto to correctly calculate shrink
-      textarea.style.height = "auto";
-      // 2. Set new height based on content
-      textarea.style.height = `${textarea.scrollHeight}px`;
+    if (block.type === "text" && textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [block.content, block.type]); // Run when content OR type changes
 
@@ -42,21 +40,8 @@ export function BlockCell({ block, onUpdate, onDelete }: BlockCellProps) {
 
       {/* Render based on Type */}
       {block.type === "code" ? (
-        <div className="rounded-md border bg-foreground p-4 relative group/code">
-          {/* Language Badge (Optional visual flair) */}
-          <div className="absolute right-2 top-2 text-[10px] text-muted-foreground font-mono select-none uppercase">
-            {block.language || "JS"}
-          </div>
-
-          <textarea
-            ref={textareaRef}
-            className="w-full bg-transparent outline-none resize-none font-mono text-sm text-background leading-relaxed overflow-hidden"
-            value={block.content}
-            onChange={(e) => onUpdate(e.target.value)}
-            placeholder="// Write code here..."
-            spellCheck={false}
-            rows={1}
-          />
+        <div className="relative z-0">
+          <CodeBlock content={block.content} onChange={onUpdate} />
         </div>
       ) : (
         <Textarea
