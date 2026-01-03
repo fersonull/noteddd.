@@ -39,7 +39,7 @@ export function NotebookEditor({ initialBlocks, onChange }: EditorProps) {
 
   // 2. UPDATE: Change content of a specific block
   const updateBlock = (id: string, content: string) => {
-    const newBlocks = blocks.map((block) =>
+    const newBlocks: Block[] = blocks.map((block) =>
       block.id === id ? { ...block, content } : block
     );
     setBlocks(newBlocks);
@@ -48,10 +48,20 @@ export function NotebookEditor({ initialBlocks, onChange }: EditorProps) {
 
   // 3. DELETE: Remove a block
   const deleteBlock = (id: string) => {
-    if (blocks.length === 1) return; // Prevent deleting the last block
-    const newBlocks = blocks.filter((b) => b.id !== id);
+    // if (blocks.length === 1) return; // Prevent deleting the last block
+    const newBlocks: Block[] = blocks.filter((b) => b.id !== id);
     setBlocks(newBlocks);
     onChange(newBlocks);
+  };
+
+  // Change the type of block
+  const changeBlockType = (id: string) => {
+    const updatedBlocks: Block[] = blocks.map((b) =>
+      b.id === id ? { ...b, type: b.type === "code" ? "text" : "code" } : b
+    );
+
+    setBlocks(updatedBlocks);
+    onChange(updatedBlocks);
   };
 
   return (
@@ -62,6 +72,7 @@ export function NotebookEditor({ initialBlocks, onChange }: EditorProps) {
             block={block}
             onUpdate={(content) => updateBlock(block.id, content)}
             onDelete={() => deleteBlock(block.id)}
+            onChangeType={() => changeBlockType(block.id)}
           />
 
           <div className="absolute -bottom-6 left-0 right-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity flex justify-center max-w-5 mx-auto">
@@ -86,7 +97,7 @@ export function NotebookEditor({ initialBlocks, onChange }: EditorProps) {
           </div>
         </div>
       ))}
-      
+
       <div className="flex gap-2 justify-center mt-8 pt-8 border-t border-dashed">
         <Button
           variant="outline"
