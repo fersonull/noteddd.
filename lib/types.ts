@@ -1,4 +1,5 @@
-// types.ts
+import { JsonValue } from "@prisma/client/runtime/client";
+
 export type BlockType = "text" | "code";
 
 export interface Block {
@@ -6,12 +7,4 @@ export interface Block {
   type: BlockType;
   content: string;
   language?: string; // Only used if type is 'code'
-}
-
-export interface Notebook {
-  id: string;
-  userId: string;
-  title: string;
-  createdAt: Date | string;
-  updatedAt: Date | string;
 }

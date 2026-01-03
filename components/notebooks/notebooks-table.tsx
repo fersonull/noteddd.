@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { NotebookIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Notebook } from "@/lib/types";
+import { Notebook } from "@/lib/generated/prisma/client";
 
 type NotebookType = {
   notebooks: Notebook[];
