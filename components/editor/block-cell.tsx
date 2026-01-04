@@ -6,6 +6,7 @@ import { ArrowRightLeft, Trash2 } from "lucide-react";
 import type { Block } from "@/lib/types";
 import { useEffect, useRef } from "react";
 import { CodeBlock } from "./code-editor";
+import BlockCellDropdownMenu from "./block-cell-dropdown-menu";
 
 interface BlockCellProps {
   block: Block;
@@ -35,14 +36,7 @@ export function BlockCell({
       {/* Sidebar Controls (Drag / Delete) */}
       <div className="absolute left-0 top-2 opacity-0 group-hover/cell:opacity-100 transition-opacity">
         <div className="flex flex-col gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-4 w-4 text-muted-foreground hover:text-black"
-            onClick={onChangeType}
-          >
-            <ArrowRightLeft className="h-3 w-3" />
-          </Button>
+          <BlockCellDropdownMenu onChangeType={onChangeType} />
           <Button
             variant="ghost"
             size="icon"
